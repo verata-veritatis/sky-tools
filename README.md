@@ -22,7 +22,7 @@ To check that you have installed Python, open up Terminal or Command Prompt and 
 Python 2.7.14 (r264:75708, Sep 16 2017, 07:36:50) [MSC v.1500 64 bit (AMD64)] on win32
 Type "help", "copyright", "credits" or "license" for further information.
 ```
-If you receive an error stating that "python is not a recognized command", you want to make sure that you have added Python as an environment variable, which is explained [here](https://edu.google.com/openonline/course-builder/docs/1.10/set-up-course-builder/check-for-python.html#add-to-path).
+If you receive an error, you want to make sure that you have added Python as an environment variable, which is explained [here](https://edu.google.com/openonline/course-builder/docs/1.10/set-up-course-builder/check-for-python.html#add-to-path).
 
 ### API Settings
 
