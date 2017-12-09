@@ -26,7 +26,14 @@ If you receive an error, you want to make sure that you have added Python as an 
 
 ### API Settings
 
-You'll need to have a working API and Secret key from Bittrex, with viewing **and** trading privileges. To do this, you'll first have to set up 2-Factor Authentication from the Settings menu. Go to the *API Keys* tab and click *Add New Key*. From here, you'll see that a new key will be added and you'll have to confirm this change using your authenticator code. **Copy your secret key and store it, because once you click away from the page, _it's gone_.**  Be sure to turn on *READ INFO*, *TRADE LIMIT* and *TRADE MARKET* options. *WITHDRAW* isn't needed for the time being. When the bot asks you for the API key and Secret key, these are the two codes you'll want to feed it.
+You'll need to have a working API and Secret key from Bittrex, with viewing **and** trading privileges. To do this, you'll first have to set up 2-Factor Authentication from the Settings menu. 
+
+- Click on *Settings* at the top once you are logged in on Bittrex. Go to the *Two-Factor Authentication* tab and setup 2FA.
+- Go to the *API Keys* tab and click *Add New Key*. From here, you'll see that a new key will be added and you'll have to confirm this change using your authenticator code. 
+- **Copy your secret key and store it, because once you click away from the page, _it's gone_.**  
+- Be sure to turn on *READ INFO*, *TRADE LIMIT* and *TRADE MARKET* options. *WITHDRAW* isn't needed for the time being. 
+
+When the bot asks you for the API key and Secret key, these are the two codes you'll want to feed it.
 
 ### Instructions
 
