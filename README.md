@@ -1,7 +1,12 @@
-## Vavrespa
-Bittrex bots for the soul
+## Vavrespa @ Bittrex
+A series of Bittrex bots to cleanse the soul.
 
 ### Donations
+
+If you like my work and have some spare change, please donate! I take no profit for the provided bots and everything I do is all in good fun!
+
+BTC:
+LTC:
 
 ### Prerequisites
 
