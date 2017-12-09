@@ -26,7 +26,7 @@ If you receive an error, you want to make sure that you have added Python as an 
 
 ### API Settings
 
-You'll need to have a working API and Secret key from Bittrex, with viewing AND trading privileges. To do this, you'll first have to set up 2-Factor Authentication from the Settings menu. You can then create new keys which you can enter into the bot when it asks you for the keys.
+You'll need to have a working API and Secret key from Bittrex, with viewing **and** trading privileges. To do this, you'll first have to set up 2-Factor Authentication from the Settings menu. You can then create new keys which you can enter into the bot when it asks you for the keys.
 
 ### Instructions
 
