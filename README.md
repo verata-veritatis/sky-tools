@@ -10,7 +10,7 @@ LTC: LcFpXJFkvA9SqpaKWcBt2bE2F9tY2TcDZv
 
 ### Credits
 
-I want to thank Eric Somdahl for making my life exponentially easier. Eric's amazing python API wrapper is nothing short of amazing. Most, if not all, of my bots use Bittrex scraping functions from Eric's package. Check it out: https://github.com/ericsomdahl/python-bittrex.
+I want to thank Eric Somdahl for making my life exponentially easier with his Python API wrapper is nothing short of amazing. Most, if not all, of my bots use Bittrex scraping functions from Eric's package. Check it out: https://github.com/ericsomdahl/python-bittrex.
 
 ### Prerequisites
 
