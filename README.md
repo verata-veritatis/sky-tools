@@ -37,6 +37,8 @@ When the bot asks you for the API key and Secret key, these are the two codes yo
 
 ### Instructions
 
+These bots are python scripts. In fact, it's probably best if you keep them on your desktop. All you need to do is right click on the *.py* file and open with Terminal or Command Prompt (as long as you installed Python properly).
+
 ### Edits & Modifications
 
 I'm an experimental physics and mathematics student, and hardly a certified "Python expert" or programming guru. If you feel something can be done better, feel free to bring up an **issue** or **pull request**, and I'll gladly take a look!
