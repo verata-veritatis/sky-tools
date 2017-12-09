@@ -5,8 +5,10 @@ A series of Bittrex bots to cleanse the soul.
 
 If you like my work and have some spare change, please donate! I take no profit for the provided bots and everything I do is all in good fun!
 
-BTC:
-LTC:
+BTC: 1PXY9zSGnxBBq2CTBa23LNTwYj3XYwoB5v
+ETH: 0x0C281207Ef1326c5E8E23AABbF015f7CEdd0338c
+LTC: LcFpXJFkvA9SqpaKWcBt2bE2F9tY2TcDZv
+
 
 ### Prerequisites
 
