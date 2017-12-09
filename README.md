@@ -32,4 +32,4 @@ You'll need to have a working API and Secret key from Bittrex, with viewing **an
 
 ### Edits & Modifications
 
-I'm an experimental physics and mathematics student, and hardly a "Python expert" or programming guru. If you feel something can be done better, feel free to bring up an **issue** or **pull request**, and I'll gladly take a look!
+I'm an experimental physics and mathematics student, and hardly a certified "Python expert" or programming guru. If you feel something can be done better, feel free to bring up an **issue** or **pull request**, and I'll gladly take a look!
