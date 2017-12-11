@@ -590,9 +590,8 @@ while True:
                 break
 
     if UserSelection == "9" or UserSelection == "1" or UserSelection == "2" or UserSelection == "3" or UserSelection == "4":
-        TradeAmt = BTCTrade / MarketBuyAmt
         print("")
-        print("BOUGHT " + str(TradeAmt) + " " + str(MARKET) + " at " + str(MarketBuyAmt) + " BTC")
+        print("BOUGHT " + str(BTCTrade) + " " + str(MARKET) + " at " + str(MarketBuyAmt) + " BTC")
         print("")
         time.sleep(0.2)
     
