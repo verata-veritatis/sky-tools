@@ -391,9 +391,10 @@ def market_settings():
 
         print("")
         MARKET = raw_input("Enter BTC market to trade e.g. 'BCC': ")
-        IntegrityMarket = V1Bittrex.get_ticker(MARKET)
+        TickerString = "BTC-" + MARKET
+        IntegrityMarket = V1Bittrex.get_ticker(TickerString)
 
-        if IntegrityMarket['message'] == "MESSAGE":
+        if IntegrityMarket['message'] == "INVALID_MARKET":
 
             time.sleep(1)
             print("Incorrect market handle. Please retry...")
@@ -406,33 +407,6 @@ def market_settings():
             print("Market successfully selected.")
 
             return MARKET    
-
-def action():
-
-    while True:
-
-        print("Press the corresponding number to take an action.")
-        print("1 = Buy, 1% ")
-        print("2 = Buy, 5% ")
-        print("3 = Buy, 10% ")
-        print("4 = Buy, 50% ")
-        print("5 = Sell, 10% ")
-        print("6 = Sell, 25% ")
-        print("7 = Sell, 50% ")
-        print("8 = Sell, 75% ")
-        print("9 = Buy, All ")
-        print("0 = Sell, All ")
-        print("Press 'x' to exit.")
-        UserSelection = raw_input("")
-
-        if UserSelection == "1" or "2" or "3" or "4" or "5" or "6" or "7" or "8" or "9" or "0" or "x" or "X":
-            return UserSelection
-        
-        else:
-            print("")
-            print("Incorrect selection. Try again.")
-            print("")
-            time.sleep(0.5)  
 
 print("")
 print("")
@@ -455,6 +429,8 @@ time.sleep(0.5)
 
 MARKET = market_settings()
 MarketString = "BTC-" + MARKET
+MarketSwap = 0
+FailedHandle = 0
 
 print("Let's play ball.")
 print("")
@@ -470,6 +446,10 @@ UserSelection = None
 
 while True:
 
+    if MarketSwap == 1:
+        MarketString = "BTC-" + MARKET
+        MarketSwap = 0
+    
     if UserSelection == None:
         pass
     else:
@@ -480,39 +460,56 @@ while True:
     AltBalanceArray = V2Bittrex.get_balance(MARKET)
     AltBalance = AltBalanceArray['result']['Available']
 
-    UserSelection = action()
+    print(MarketString)
+    print(str(AltBalance) + " " + str(MARKET) + " available")
+    print("")
+    print("Press the corresponding number to take an action, or enter a market to swap to.")
+    print("1 = Buy, 1% ")
+    print("2 = Buy, 5% ")
+    print("3 = Buy, 10% ")
+    print("4 = Buy, 50% ")
+    print("5 = Sell, 10% ")
+    print("6 = Sell, 25% ")
+    print("7 = Sell, 50% ")
+    print("8 = Sell, 75% ")
+    print("9 = Buy, All ")
+    print("0 = Sell, All ")
+    print("Enter a ticker to swap markets (e.g. BCC).")
+    print("Press 'x' to exit.")
+    print("")
+    UserSelection = raw_input("")
 
     if UserSelection == "1":
-        BTCTrade = float(BTCBalance * 0.01)
-
         MarketBuy = V1Bittrex.get_orderbook(MarketString, depth_type=SELL_ORDERBOOK)
         MarketBuyAmt = float(MarketBuy['result'][0]['Rate'])
 
-        #V1Bittrex.buy_limit(MarketString, BTCTrade, MarketBuyAmt)
+        BTCTrade = float(BTCBalance * 0.01) / MarketBuyAmt
+
+        V1Bittrex.buy_limit(MarketString, BTCTrade, MarketBuyAmt)
 
     elif UserSelection == "2":
-        BTCTrade = float(BTCBalance * 0.05)
-
         MarketBuy = V1Bittrex.get_orderbook(MarketString, depth_type=SELL_ORDERBOOK)
         MarketBuyAmt = float(MarketBuy['result'][0]['Rate'])
 
-        #V1Bittrex.buy_limit(MarketString, BTCTrade, MarketBuyAmt)
+        BTCTrade = float(BTCBalance * 0.05) / MarketBuyAmt
+
+        V1Bittrex.buy_limit(MarketString, BTCTrade, MarketBuyAmt)
 
     elif UserSelection == "3":
-        BTCTrade = float(BTCBalance * 0.1)
-
         MarketBuy = V1Bittrex.get_orderbook(MarketString, depth_type=SELL_ORDERBOOK)
         MarketBuyAmt = float(MarketBuy['result'][0]['Rate'])
 
-        #V1Bittrex.buy_limit(MarketString, BTCTrade, MarketBuyAmt)
+        BTCTrade = float(BTCBalance * 0.1) / MarketBuyAmt
+
+        V1Bittrex.buy_limit(MarketString, BTCTrade, MarketBuyAmt)
 
     elif UserSelection == "4":
-        BTCTrade = float(BTCBalance * 0.5)
-
         MarketBuy = V1Bittrex.get_orderbook(MarketString, depth_type=SELL_ORDERBOOK)
         MarketBuyAmt = float(MarketBuy['result'][0]['Rate'])
 
-        #V1Bittrex.buy_limit(MarketString, BTCTrade, MarketBuyAmt)
+        BTCTrade = float(BTCBalance * 0.5) / MarketBuyAmt
+
+        V1Bittrex.buy_limit(MarketString, BTCTrade, MarketBuyAmt)
 
     elif UserSelection == "5":        
         AltTrade = float(AltBalance * 0.1)
@@ -520,7 +517,7 @@ while True:
         MarketSell = V1Bittrex.get_orderbook(MarketString, depth_type=BUY_ORDERBOOK)
         MarketSellAmt = float(MarketSell['result'][0]['Rate'])
 
-        #V1Bittrex.sell_limit(MarketString, AltTrade, MarketSellAmt)
+        V1Bittrex.sell_limit(MarketString, AltTrade, MarketSellAmt)
 
     elif UserSelection == "6":
         AltTrade = float(AltBalance * 0.25)
@@ -528,7 +525,7 @@ while True:
         MarketSell = V1Bittrex.get_orderbook(MarketString, depth_type=BUY_ORDERBOOK)
         MarketSellAmt = float(MarketSell['result'][0]['Rate'])
 
-        #V1Bittrex.sell_limit(MarketString, AltTrade, MarketSellAmt)
+        V1Bittrex.sell_limit(MarketString, AltTrade, MarketSellAmt)
 
     elif UserSelection == "7":
         AltTrade = float(AltBalance * 0.5)
@@ -536,7 +533,7 @@ while True:
         MarketSell = V1Bittrex.get_orderbook(MarketString, depth_type=BUY_ORDERBOOK)
         MarketSellAmt = float(MarketSell['result'][0]['Rate'])
 
-        #V1Bittrex.sell_limit(MarketString, AltTrade, MarketSellAmt)
+        V1Bittrex.sell_limit(MarketString, AltTrade, MarketSellAmt)
 
     elif UserSelection == "8":
         AltTrade = float(AltBalance * 0.75)
@@ -544,15 +541,17 @@ while True:
         MarketSell = V1Bittrex.get_orderbook(MarketString, depth_type=BUY_ORDERBOOK)
         MarketSellAmt = float(MarketSell['result'][0]['Rate'])
 
-        #V1Bittrex.sell_limit(MarketString, AltTrade, MarketSellAmt)
+        V1Bittrex.sell_limit(MarketString, AltTrade, MarketSellAmt)
 
     elif UserSelection == "9":
-        BTCTrade = float(BTCBalance * 0.98)
-
         MarketBuy = V1Bittrex.get_orderbook(MarketString, depth_type=SELL_ORDERBOOK)
         MarketBuyAmt = float(MarketBuy['result'][0]['Rate'])
 
-        #V1Bittrex.buy_limit(MarketString, BTCTrade, MarketBuyAmt)
+        BTCTrade = float(BTCBalance * 0.98) / MarketBuyAmt
+
+        results = V1Bittrex.buy_limit(MarketString, BTCTrade, MarketBuyAmt)
+
+        print(results)
 
     elif UserSelection == "0":
         AltTrade = float(AltBalance)
@@ -560,14 +559,35 @@ while True:
         MarketSell = V1Bittrex.get_orderbook(MarketString, depth_type=BUY_ORDERBOOK)
         MarketSellAmt = float(MarketSell['result'][0]['Rate'])
 
-        #V1Bittrex.sell_limit(MarketString, AltTrade, MarketSellAmt)
+        V1Bittrex.sell_limit(MarketString, AltTrade, MarketSellAmt)
     
-    elif UserSelection == "x" or "X":
+    elif UserSelection == "x" or UserSelection == "X":
         break
 
     else:
-        print("Error: Incomplete Form")
-        break
+        while True:
+
+            if FailedHandle == 1:
+                UserSelection = raw_input("")
+                
+            TickerString = "BTC-" + UserSelection
+            IntegrityMarket = V1Bittrex.get_ticker(TickerString)
+
+            if IntegrityMarket['message'] == "INVALID_MARKET":
+
+                FailedHandle = 1
+                print("Incorrect market handle. Please retry...")
+                print("")
+
+                continue
+
+            else:
+                MARKET = UserSelection
+                MarketSwap = 1
+                print("Swapping markets...")
+                print("")
+                
+                break
 
     if UserSelection == "9" or UserSelection == "1" or UserSelection == "2" or UserSelection == "3" or UserSelection == "4":
         TradeAmt = BTCTrade / MarketBuyAmt
