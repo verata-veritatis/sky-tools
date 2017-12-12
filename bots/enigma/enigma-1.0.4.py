@@ -596,7 +596,7 @@ while True:
     if UserSelection == "9" or UserSelection == "1" or UserSelection == "2" or UserSelection == "3" or UserSelection == "4":
         print("")
         print("BOUGHT " + str(BTCTrade) + " " + str(MARKET) + " at " + str(MarketBuyAmt) + " BTC")
-        print("Required price " + str(MarketBuyAmt * 1.0025) +  " BTC or above to make profit.")
+        print("Required " + str(MarketBuyAmt * 1.0050) +  " BTC or above to make profit.")
         print("")
         time.sleep(0.2)
     
