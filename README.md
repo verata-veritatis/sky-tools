@@ -16,13 +16,17 @@ I want to thank **Eric Somdahl** for making my life exponentially easier with hi
 
 ### Prerequisites
 
-To use the Vavrespa Bittrex bots, you'll need to have Python 2.7 installed (3.6 versions are currently in the works). To download Python simply head over to the downloads section at Python.org, https://www.python.org/downloads/, and download and install the most recent version of Python 2.7 (as of December 8, 2017, Python 2.7.14 is the most up-to-date iteration). All functions used by the bots from external packages are embedded into the script itself, so no need to install any other Python packages. <br/><br/>
+To use the Vavrespa Bittrex bots, you'll need to have Python 2.7 installed (3.6 versions are currently in the works), along with the Requests package. To download Python simply head over to the downloads section at Python.org, https://www.python.org/downloads/, and download and install the most recent version of Python 2.7 (as of December 8, 2017, Python 2.7.14 is the most up-to-date iteration). All functions used by the bots from external packages are embedded into the script itself, so no need to install any other Python packages. <br/><br/>
 To check that you have installed Python, open up Terminal or Command Prompt and type `python`.  You should see your version of the Python language. For example, the command line will return:
 ```
 Python 2.7.14 (r264:75708, Sep 16 2017, 07:36:50) [MSC v.1500 64 bit (AMD64)] on win32
 Type "help", "copyright", "credits" or "license" for further information.
 ```
 If you receive an error, you want to make sure that you have added Python as an environment variable, which is explained [here](https://edu.google.com/openonline/course-builder/docs/1.10/set-up-course-builder/check-for-python.html#add-to-path).
+
+To install the Requests package, it's best if you use *pip*. Download [get-pip.py](https://bootstrap.pypa.io/get-pip.py), and leave it on your desktop. Open terminal or command prompt and navigate to your desktop (most likely using the command `cd Desktop`). You can then run get-pip.py by typing `python get-pip.py`. This will install *pip*.
+
+Once *pip* has finished installing, you're able to install the Requests package by simply typing `pip install requests`. You should be good to go from here!
 
 ### API Settings
 
