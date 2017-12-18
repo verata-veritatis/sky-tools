@@ -494,7 +494,7 @@ while True:
 
         BTCTrade = float(BTCBalance * 0.01) / MarketBuyAmt
 
-        V1Bittrex.buy_limit(MarketString, BTCTrade, MarketBuyAmt)
+        orderBuy = V1Bittrex.buy_limit(MarketString, BTCTrade, MarketBuyAmt)
 
     elif UserSelection == "2":
         MarketBuy = V1Bittrex.get_orderbook(MarketString, depth_type=SELL_ORDERBOOK)
@@ -502,7 +502,7 @@ while True:
 
         BTCTrade = float(BTCBalance * 0.05) / MarketBuyAmt
 
-        V1Bittrex.buy_limit(MarketString, BTCTrade, MarketBuyAmt)
+        orderBuy = V1Bittrex.buy_limit(MarketString, BTCTrade, MarketBuyAmt)
 
     elif UserSelection == "3":
         MarketBuy = V1Bittrex.get_orderbook(MarketString, depth_type=SELL_ORDERBOOK)
@@ -510,7 +510,7 @@ while True:
 
         BTCTrade = float(BTCBalance * 0.1) / MarketBuyAmt
 
-        V1Bittrex.buy_limit(MarketString, BTCTrade, MarketBuyAmt)
+        orderBuy = V1Bittrex.buy_limit(MarketString, BTCTrade, MarketBuyAmt)
 
     elif UserSelection == "4":
         MarketBuy = V1Bittrex.get_orderbook(MarketString, depth_type=SELL_ORDERBOOK)
@@ -518,7 +518,7 @@ while True:
 
         BTCTrade = float(BTCBalance * 0.5) / MarketBuyAmt
 
-        V1Bittrex.buy_limit(MarketString, BTCTrade, MarketBuyAmt)
+        orderBuy = V1Bittrex.buy_limit(MarketString, BTCTrade, MarketBuyAmt)
 
     elif UserSelection == "5":        
         AltTrade = float(AltBalance * 0.1)
@@ -526,7 +526,7 @@ while True:
         MarketSell = V1Bittrex.get_orderbook(MarketString, depth_type=BUY_ORDERBOOK)
         MarketSellAmt = float(MarketSell['result'][0]['Rate'])
 
-        V1Bittrex.sell_limit(MarketString, AltTrade, MarketSellAmt)
+        orderSell = V1Bittrex.sell_limit(MarketString, AltTrade, MarketSellAmt)
 
     elif UserSelection == "6":
         AltTrade = float(AltBalance * 0.25)
@@ -534,7 +534,7 @@ while True:
         MarketSell = V1Bittrex.get_orderbook(MarketString, depth_type=BUY_ORDERBOOK)
         MarketSellAmt = float(MarketSell['result'][0]['Rate'])
 
-        V1Bittrex.sell_limit(MarketString, AltTrade, MarketSellAmt)
+        orderSell = V1Bittrex.sell_limit(MarketString, AltTrade, MarketSellAmt)
 
     elif UserSelection == "7":
         AltTrade = float(AltBalance * 0.5)
@@ -542,7 +542,7 @@ while True:
         MarketSell = V1Bittrex.get_orderbook(MarketString, depth_type=BUY_ORDERBOOK)
         MarketSellAmt = float(MarketSell['result'][0]['Rate'])
 
-        V1Bittrex.sell_limit(MarketString, AltTrade, MarketSellAmt)
+        orderSell = V1Bittrex.sell_limit(MarketString, AltTrade, MarketSellAmt)
 
     elif UserSelection == "8":
         AltTrade = float(AltBalance * 0.75)
@@ -550,7 +550,7 @@ while True:
         MarketSell = V1Bittrex.get_orderbook(MarketString, depth_type=BUY_ORDERBOOK)
         MarketSellAmt = float(MarketSell['result'][0]['Rate'])
 
-        V1Bittrex.sell_limit(MarketString, AltTrade, MarketSellAmt)
+        orderSell = V1Bittrex.sell_limit(MarketString, AltTrade, MarketSellAmt)
 
     elif UserSelection == "9":
         MarketBuy = V1Bittrex.get_orderbook(MarketString, depth_type=SELL_ORDERBOOK)
@@ -558,7 +558,7 @@ while True:
 
         BTCTrade = float(BTCBalance * 0.98) / MarketBuyAmt
 
-        results = V1Bittrex.buy_limit(MarketString, BTCTrade, MarketBuyAmt)
+        orderBuy = results = V1Bittrex.buy_limit(MarketString, BTCTrade, MarketBuyAmt)
 
         print(results)
 
@@ -568,7 +568,7 @@ while True:
         MarketSell = V1Bittrex.get_orderbook(MarketString, depth_type=BUY_ORDERBOOK)
         MarketSellAmt = float(MarketSell['result'][0]['Rate'])
 
-        V1Bittrex.sell_limit(MarketString, AltTrade, MarketSellAmt)
+        orderSell = V1Bittrex.sell_limit(MarketString, AltTrade, MarketSellAmt)
     
     elif UserSelection == "x" or UserSelection == "X":
         break
@@ -599,6 +599,12 @@ while True:
                 break
 
     if UserSelection == "9" or UserSelection == "1" or UserSelection == "2" or UserSelection == "3" or UserSelection == "4":
+
+        orderUUID = orderBuy['result']['uuid']
+        orderGate = V1Bittrex.cancel(orderUUID)
+        if orderGate['success'] == "true":
+            print("Market order not filled. Please try again...")
+
         print("")
         print("BOUGHT " + str(BTCTrade) + " " + str(MARKET) + " at " + str(MarketBuyAmt) + " BTC")
         print("Required " + str(MarketBuyAmt * 1.0050) +  " BTC or above to make profit.")
@@ -606,6 +612,12 @@ while True:
         time.sleep(0.2)
     
     elif UserSelection == "0" or UserSelection == "5" or UserSelection == "6" or UserSelection ==  "7" or UserSelection == "8":
+
+        orderUUID = orderSell['result']['uuid']
+        orderGate = V1Bittrex.cancel(orderUUID)
+        if orderGate['success'] == "true":
+            print("Market order not filled. Please try again...")
+
         print("")
         print("SOLD " + str(AltTrade) + " " + str(MARKET) + " at " + str(MarketSellAmt) + " BTC")
         print("")
