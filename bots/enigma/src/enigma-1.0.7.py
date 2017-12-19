@@ -558,7 +558,7 @@ while True:
 
         BTCTrade = float(BTCBalance * 0.98) / MarketBuyAmt
 
-        orderBuy = results = V1Bittrex.buy_limit(MarketString, BTCTrade, MarketBuyAmt)
+        orderBuy = V1Bittrex.buy_limit(MarketString, BTCTrade, MarketBuyAmt)
 
         print(results)
 
@@ -600,10 +600,27 @@ while True:
 
     if UserSelection == "9" or UserSelection == "1" or UserSelection == "2" or UserSelection == "3" or UserSelection == "4":
 
-        orderUUID = orderBuy['result']['uuid']
-        orderGate = V1Bittrex.cancel(orderUUID)
-        if orderGate['success'] == "true":
-            print("Market order not filled. Please try again...")
+        while True:
+            if orderBuy == None:
+                continue
+
+            elif orderBuy['message'] == "MIN_TRADE_REQUIREMENT_NOT_MET":
+                print("Minimum trade requirement not met. Please try again...")
+
+                break
+
+            elif orderBuy['message'] == "QUANTITY_NOT_PROVIDED":
+                print("Improper trade quantity. Please try again...")
+
+                break
+
+            else:
+                orderUUID =  orderBuy['result']['uuid']
+                orderGate = V1Bittrex.cancel(orderUUID)
+                if orderGate['success'] == "true":
+                    print("Market order not filled. Please try again...")
+
+                break
 
         print("")
         print("BOUGHT " + str(BTCTrade) + " " + str(MARKET) + " at " + str(MarketBuyAmt) + " BTC")
@@ -613,10 +630,27 @@ while True:
     
     elif UserSelection == "0" or UserSelection == "5" or UserSelection == "6" or UserSelection ==  "7" or UserSelection == "8":
 
-        orderUUID = orderSell['result']['uuid']
-        orderGate = V1Bittrex.cancel(orderUUID)
-        if orderGate['success'] == "true":
-            print("Market order not filled. Please try again...")
+        while True:
+            if orderSell == None:
+                continue
+
+            elif orderBuy['message'] == "MIN_TRADE_REQUIREMENT_NOT_MET":
+                print("Minimum trade requirement not met. Please try again...")
+
+                break
+
+            elif orderBuy['message'] == "QUANTITY_NOT_PROVIDED":
+                print("Improper trade quantity. Please try again...")
+
+                break
+
+            else:
+                orderUUID = orderSell['result']['uuid']
+                orderGate = V1Bittrex.cancel(orderUUID)
+                if orderGate['success'] == "true":
+                    print("Market order not filled. Please try again...")
+
+                break
 
         print("")
         print("SOLD " + str(AltTrade) + " " + str(MARKET) + " at " + str(MarketSellAmt) + " BTC")
