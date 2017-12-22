@@ -442,7 +442,7 @@ print("")
 
 time.sleep(0.5)
 
-print("NOTE: All orders are market. You've been warned.")
+print("NOTE: This is for BTC trading ONLY - no USDT. All orders are market. You've been warned.")
 print("")
 
 time.sleep(0.5)
@@ -459,6 +459,8 @@ while True:
         pass
     else:
         del UserSelection
+
+    ErrorCount = 0
 
     BTCBalanceArray = V2Bittrex.get_balance('BTC')
     BTCBalance = BTCBalanceArray['result']['Available']
@@ -484,13 +486,15 @@ while True:
     print("9 = Buy, All ")
     print("0 = Sell, All ")
     print("Enter a ticker to swap markets (e.g. BCC).")
+    print("Press 'b' to set buy order, 's' to set sell order, or 'w' to check your BTC wallet.")
     print("Press 'x' to exit.")
     print("")
     UserSelection = raw_input("")
 
     if UserSelection == "1":
         MarketBuy = V1Bittrex.get_orderbook(MarketString, depth_type=SELL_ORDERBOOK)
-        MarketBuyAmt = float(MarketBuy['result'][0]['Rate'])
+        MarketBuyAmt = float(MarketBuy['result'][2]['Rate'])
+        AlertBuyAmt = float(MarketBuy['result'][0]['Rate'])
 
         BTCTrade = float(BTCBalance * 0.01) / MarketBuyAmt
 
@@ -498,7 +502,8 @@ while True:
 
     elif UserSelection == "2":
         MarketBuy = V1Bittrex.get_orderbook(MarketString, depth_type=SELL_ORDERBOOK)
-        MarketBuyAmt = float(MarketBuy['result'][0]['Rate'])
+        MarketBuyAmt = float(MarketBuy['result'][2]['Rate'])
+        AlertBuyAmt = float(MarketBuy['result'][0]['Rate'])
 
         BTCTrade = float(BTCBalance * 0.05) / MarketBuyAmt
 
@@ -506,7 +511,8 @@ while True:
 
     elif UserSelection == "3":
         MarketBuy = V1Bittrex.get_orderbook(MarketString, depth_type=SELL_ORDERBOOK)
-        MarketBuyAmt = float(MarketBuy['result'][0]['Rate'])
+        MarketBuyAmt = float(MarketBuy['result'][2]['Rate'])
+        AlertBuyAmt = float(MarketBuy['result'][0]['Rate'])
 
         BTCTrade = float(BTCBalance * 0.1) / MarketBuyAmt
 
@@ -514,7 +520,8 @@ while True:
 
     elif UserSelection == "4":
         MarketBuy = V1Bittrex.get_orderbook(MarketString, depth_type=SELL_ORDERBOOK)
-        MarketBuyAmt = float(MarketBuy['result'][0]['Rate'])
+        MarketBuyAmt = float(MarketBuy['result'][2]['Rate'])
+        AlertBuyAmt = float(MarketBuy['result'][0]['Rate'])
 
         BTCTrade = float(BTCBalance * 0.5) / MarketBuyAmt
 
@@ -524,7 +531,8 @@ while True:
         AltTrade = float(AltBalance * 0.1)
 
         MarketSell = V1Bittrex.get_orderbook(MarketString, depth_type=BUY_ORDERBOOK)
-        MarketSellAmt = float(MarketSell['result'][0]['Rate'])
+        MarketSellAmt = float(MarketSell['result'][2]['Rate'])
+        AlertSellAmt = float(MarketSell['result'][0]['Rate'])
 
         orderSell = V1Bittrex.sell_limit(MarketString, AltTrade, MarketSellAmt)
 
@@ -532,7 +540,8 @@ while True:
         AltTrade = float(AltBalance * 0.25)
 
         MarketSell = V1Bittrex.get_orderbook(MarketString, depth_type=BUY_ORDERBOOK)
-        MarketSellAmt = float(MarketSell['result'][0]['Rate'])
+        MarketSellAmt = float(MarketSell['result'][2]['Rate'])
+        AlertSellAmt = float(MarketSell['result'][0]['Rate'])
 
         orderSell = V1Bittrex.sell_limit(MarketString, AltTrade, MarketSellAmt)
 
@@ -540,7 +549,8 @@ while True:
         AltTrade = float(AltBalance * 0.5)
 
         MarketSell = V1Bittrex.get_orderbook(MarketString, depth_type=BUY_ORDERBOOK)
-        MarketSellAmt = float(MarketSell['result'][0]['Rate'])
+        MarketSellAmt = float(MarketSell['result'][2]['Rate'])
+        AlertSellAmt = float(MarketSell['result'][0]['Rate'])
 
         orderSell = V1Bittrex.sell_limit(MarketString, AltTrade, MarketSellAmt)
 
@@ -548,30 +558,66 @@ while True:
         AltTrade = float(AltBalance * 0.75)
 
         MarketSell = V1Bittrex.get_orderbook(MarketString, depth_type=BUY_ORDERBOOK)
-        MarketSellAmt = float(MarketSell['result'][0]['Rate'])
+        MarketSellAmt = float(MarketSell['result'][2]['Rate'])
+        AlertSellAmt = float(MarketSell['result'][0]['Rate'])
 
         orderSell = V1Bittrex.sell_limit(MarketString, AltTrade, MarketSellAmt)
 
     elif UserSelection == "9":
         MarketBuy = V1Bittrex.get_orderbook(MarketString, depth_type=SELL_ORDERBOOK)
-        MarketBuyAmt = float(MarketBuy['result'][0]['Rate'])
+        MarketBuyAmt = float(MarketBuy['result'][2]['Rate'])
+        AlertBuyAmt = float(MarketBuy['result'][0]['Rate'])
 
         BTCTrade = float(BTCBalance * 0.98) / MarketBuyAmt
 
         orderBuy = V1Bittrex.buy_limit(MarketString, BTCTrade, MarketBuyAmt)
 
-        print(results)
-
     elif UserSelection == "0":
         AltTrade = float(AltBalance)
 
         MarketSell = V1Bittrex.get_orderbook(MarketString, depth_type=BUY_ORDERBOOK)
-        MarketSellAmt = float(MarketSell['result'][0]['Rate'])
+        MarketSellAmt = float(MarketSell['result'][2]['Rate'])
+        AlertSellAmt = float(MarketSell['result'][0]['Rate'])
 
         orderSell = V1Bittrex.sell_limit(MarketString, AltTrade, MarketSellAmt)
     
     elif UserSelection == "x" or UserSelection == "X":
         break
+
+    elif UserSelection == "w" or UserSelection == "W":
+        BTCBalanceArray = V2Bittrex.get_balance('BTC')
+        BTCBalance = BTCBalanceArray['result']['Available']
+
+        print("")
+        print("Available = " + str(BTCBalance) + " BTC")
+        print("")
+
+    elif UserSelection == "B" or UserSelection == "b":
+        print("")
+        CustomOrder = raw_input("Enter a bid price (e.g. 0.00002581): ")
+        BalanceProg = raw_input("Enter fraction of BTC balance to trade with (e.g. 0.10): ")
+
+        BTCTrade = float(BTCBalance * BalanceProg) / float(CustomOrder)
+        orderBuy = V1Bittrex.buy_limit(MarketString, BTCTrade, float(CustomOrder))
+
+        print("")
+        print("Bid order set at " + str(BTCTrade) + " " + str(MARKET) + " at " + CustomOrder + " BTC")
+        print("Required " + str(MarketBuyAmt * 1.0050) +  " BTC or above to make profit.")
+        print("")
+        time.sleep(0.2)
+
+    elif UserSelection == "S" or UserSelection == "s":
+        print("")
+        CustomOrder = raw_input("Enter an ask price (e.g. 0.00002581): ")
+        BalanceProg = raw_input("Enter fraction of 'altcoin' balance to trade with (e.g. 0.10): ")
+
+        AltTrade = float(AltBalance * BalanceProg)
+        orderSell = V1Bittrex.sell_limit(MarketString, AltTrade, float(CustomOrder))
+
+        print("")
+        print("Ask order set at " + str(AltTrade) + " " + str(MARKET) + " at " + CustomOrder + " BTC")
+        print("")
+        time.sleep(0.2)
 
     else:
         while True:
@@ -601,58 +647,67 @@ while True:
     if UserSelection == "9" or UserSelection == "1" or UserSelection == "2" or UserSelection == "3" or UserSelection == "4":
 
         while True:
-            if orderBuy == None:
+            if orderBuy == []:
                 continue
 
             elif orderBuy['message'] == "MIN_TRADE_REQUIREMENT_NOT_MET":
                 print("Minimum trade requirement not met. Please try again...")
+                ErrorCount = 1
 
                 break
 
             elif orderBuy['message'] == "QUANTITY_NOT_PROVIDED":
                 print("Improper trade quantity. Please try again...")
+                ErrorCount = 1
 
                 break
 
             else:
-                orderUUID =  orderBuy['result']['uuid']
-                orderGate = V1Bittrex.cancel(orderUUID)
-                if orderGate['success'] == "true":
-                    print("Market order not filled. Please try again...")
+                #print(OrderBuy)
+                #orderUUID =  orderBuy['result']['uuid']
+                #orderGate = V1Bittrex.cancel(orderUUID)
+                #if orderGate['success'] == "true":
+                    #print("Market order not filled. Please try again...")
 
                 break
 
-        print("")
-        print("BOUGHT " + str(BTCTrade) + " " + str(MARKET) + " at " + str(MarketBuyAmt) + " BTC")
-        print("Required " + str(MarketBuyAmt * 1.0050) +  " BTC or above to make profit.")
-        print("")
+            if ErrorCount == 0:
+                print("")
+                print("BOUGHT " + str(BTCTrade) + " " + str(MARKET) + " at " + str(AlertBuyAmt) + " BTC")
+                print("Required " + str(AlertBuyAmt * 1.0050) +  " BTC or above to make profit.")
+                print("")
+
         time.sleep(0.2)
     
     elif UserSelection == "0" or UserSelection == "5" or UserSelection == "6" or UserSelection ==  "7" or UserSelection == "8":
 
         while True:
-            if orderSell == None:
+            if orderSell == []:
                 continue
 
-            elif orderBuy['message'] == "MIN_TRADE_REQUIREMENT_NOT_MET":
+            elif orderSell['message'] == "MIN_TRADE_REQUIREMENT_NOT_MET":
                 print("Minimum trade requirement not met. Please try again...")
+                ErrorCount = 1
 
                 break
 
-            elif orderBuy['message'] == "QUANTITY_NOT_PROVIDED":
+            elif orderSell['message'] == "QUANTITY_NOT_PROVIDED":
                 print("Improper trade quantity. Please try again...")
+                ErrorCount = 1
 
                 break
 
             else:
-                orderUUID = orderSell['result']['uuid']
-                orderGate = V1Bittrex.cancel(orderUUID)
-                if orderGate['success'] == "true":
-                    print("Market order not filled. Please try again...")
+                #print(OrderSell)
+                #orderUUID = orderSell['result']['uuid']
+                #orderGate = V1Bittrex.cancel(orderUUID)
+                #if orderGate['success'] == "true":
+                    #print("Market order not filled. Please try again...")
 
                 break
 
-        print("")
-        print("SOLD " + str(AltTrade) + " " + str(MARKET) + " at " + str(MarketSellAmt) + " BTC")
-        print("")
-        time.sleep(0.2)
+            if ErrorCount == 0:
+                print("")
+                print("SOLD " + str(AltTrade) + " " + str(MARKET) + " at " + str(AlertSellAmt) + " BTC")
+                print("")
+                time.sleep(0.2)
