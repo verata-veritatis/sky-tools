@@ -1,12 +1,10 @@
-##############################################################
-# Bittrex API Wrapper (Eric Somdahl)
-#
-# Thank you Eric for making my life so much easier. See more
-# information at https://bittrex.com/Home/Api. You can
-# also find Eric's wrapper at 
-# https://github.com/ericsomdahl/python-bittrex.
-#
-##############################################################
+#######################################################################
+# Bittrex API Wrapper
+# Author:       Eric Somdahl, Anakratis / Vavrespa
+# Description:  Thank you Eric for making my life so much easier. 
+#               See more information at https://bittrex.com/Home/Api. 
+#               https://github.com/ericsomdahl/python-bittrex.
+#######################################################################
 
 import hmac
 import hashlib
