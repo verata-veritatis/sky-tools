@@ -29,9 +29,9 @@ keysAPI.close()
 def api_settings():
     while True:
         print("Reading API keys...")
-        IntegrityAPI = V2Bittrex.get_balance("BTC")
+        verifyKeys = V2Bittrex.get_balance("BTC")
 
-        if IntegrityAPI['message'] == "APIKEY_INVALID":
+        if verifyKeys['message'] == "APIKEY_INVALID":
             time.sleep(1)
             print("Incorrect API key. Gate will now close...")
             print("")
@@ -50,7 +50,7 @@ def market_settings():
         MARKET = MARKET.upper()
         TickerString = "BTC-" + MARKET
 
-        IntegrityMarket = V1Bittrex.get_ticker(TickerString)
+        verifyMarket = V1Bittrex.get_ticker(TickerString)
         lValueArray = V1Bittrex.get_balance(MARKET)
         if lValueArray['success'] == False:
             pass
@@ -58,7 +58,7 @@ def market_settings():
         else:
             lValue = lValueArray['result']['Available']
 
-        if IntegrityMarket['message'] == "INVALID_MARKET":
+        if verifyMarket['message'] == "INVALID_MARKET":
             time.sleep(1)
             print("Incorrect market handle. Please retry...")
             print("")
