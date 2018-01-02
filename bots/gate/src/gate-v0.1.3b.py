@@ -100,4 +100,5 @@ while True:
                     ActualRate = StoplossOrder['result']['Price']
                     print("STOPLOSS activated.")
                     print("SOLD " + MarketBalance + " " + MARKET + " at " + str(ActualRate) + " BTC")
+                    print("")
                     quit()
