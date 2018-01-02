@@ -14,7 +14,7 @@ from settings import V1Bittrex, V2Bittrex
 
 print("")
 print("")
-print("Gate 0.12")
+print("Gate.")
 print("Programmed with love by Vavrespa")
 
 time.sleep(1)
