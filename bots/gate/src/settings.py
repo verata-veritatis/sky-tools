@@ -27,7 +27,6 @@ V2Bittrex = btrxapi.Bittrex(APIKEY, SECRETKEY, api_version=API_V2_0)
 keysAPI.close()
 
 def api_settings():
-
     while True:
         print("Reading API keys...")
         IntegrityAPI = V2Bittrex.get_balance("BTC")
@@ -46,7 +45,6 @@ def api_settings():
             return APIKEY, SECRETKEY
 
 def market_settings():
-
     while True:
         MARKET = input("Enter BTC market e.g. 'BCC': ")
         MARKET = MARKET.upper()
