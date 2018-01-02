@@ -1,4 +1,4 @@
-## Vavrespa @ Bittrex
+## Kontour @ Bittrex
 A series of Bittrex bots to cleanse the soul.
 
 ### Donations
