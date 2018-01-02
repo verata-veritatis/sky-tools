@@ -1,16 +1,18 @@
-##################################################################
-# Bittrex Stoploss Bot
+####################################################################
+# Automated Stoploss for Bittrex
 #
-# Author:   Anakratis
-# Purpose:  Creates a simple stoploss bot for Bittrex users.
+# Author:   Anakratis / Vavrespa
+# NOTE:     You must have an API key assigned, with trading and
+#           viewing privileges.
 #
-##################################################################
+####################################################################
 
 import time
 import settings
 import btrxapi
 
 from btrxapi import API_V1_1, API_V2_0
+from settings import V1Bittrex, V2Bittrex
 
 print("")
 print("")
@@ -22,12 +24,6 @@ time.sleep(1)
 print("")
 print("Launching...")
 
-time.sleep(2)
-
-APIKEY, SECRETKEY = settings.api_settings()
-V1Bittrex = btrxapi.Bittrex(APIKEY, SECRETKEY, api_version=API_V1_1)
-V2Bittrex = btrxapi.Bittrex(APIKEY, SECRETKEY, api_version=API_V2_0)
-
 time.sleep(0.5)
 
 print("")
@@ -35,7 +31,6 @@ MARKET = settings.market_settings()
 
 print("")
 while True:
-
     STOP = input("Enter stoploss in BTC e.g. 0.00001805: ")
 
     print("")
@@ -44,16 +39,13 @@ while True:
     lConf = input("Y/N? ")
 
     if lConf == "y" or lConf == "Y":
-
         break
 
     elif lConf == "n" or lConf == "N":
-
         print("Please re-enter values...")
         time.sleep(1)
 
     else:
-
         print("Incorrect entry, assuming bounds are correct...")
         time.sleep(1)
         print("")
@@ -70,7 +62,6 @@ MarketString = "BTC-" + MARKET
 print(MarketString + " STOP : " + str(STOP) + " BTC")
 
 while True:
-
     MarketBalanceArray = V2Bittrex.get_balance(MARKET)
     MarketBalance = MarketBalanceArray['result']['Available']
     
@@ -78,17 +69,13 @@ while True:
     TradePrice = float(TradePriceArray['result']['Last'])
 
     if TradePrice <= STOP:
-    
         if MarketBalance > 0:
-
             OpenOrders = []
             OpenOrdersArray = V2Bittrex.get_open_orders(MarketString)
             OpenOrdersNumber = len(OpenOrdersArray['result'])
 
             if OpenOrdersNumber > 0:
-
                 for i in range(0, OpenOrdersNumber):
-
                     OpenOrdersIter = OpenOrdersArray['result'][i]['OrderUuid']
                     print(OpenOrdersIter)
                     test = V1Bittrex.cancel(OpenOrdersIter)
