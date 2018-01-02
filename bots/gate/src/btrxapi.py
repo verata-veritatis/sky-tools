@@ -64,25 +64,11 @@ BASE_URL_V2_0 = 'https://bittrex.com/api/v2.0{path}?'
 PROTECTION_PUB = 'pub'  # public methods
 PROTECTION_PRV = 'prv'  # authenticated methods
 
-
-#def encrypt(api_key, api_secret, export=True, export_fn='secrets.json'):
-#    cipher = AES.new(getpass.getpass(
-#        'Input encryption password (string will not show)'))
-#    api_key_n = cipher.encrypt(api_key)
-#    api_secret_n = cipher.encrypt(api_secret)
-#    api = {'key': str(api_key_n), 'secret': str(api_secret_n)}
-#    if export:
-#        with open(export_fn, 'w') as outfile:
-#            json.dump(api, outfile)
-#    return api
-
-
 def using_requests(request_url, apisign):
     return requests.get(
         request_url,
         headers={"apisign": apisign}
     ).json()
-
 
 class Bittrex(object):
 
