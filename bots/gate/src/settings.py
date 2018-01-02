@@ -1,7 +1,7 @@
 ####################################################################
 # API and Market Settings Assembly
 #
-# Author:   Anakratis
+# Author:   Anakratis / Vavrespa
 # NOTE:     You must have an API key assigned, with trading and
 #           viewing privileges.
 #
@@ -21,20 +21,18 @@ SECRETKEY = SECRETKEY[14:46]
 #filename = os.path.join(os.path.dirname(sys.executable), 'secrets.json')
 #keysAPI = open(filename, 'r')
 
+V1Bittrex = btrxapi.Bittrex(APIKEY, SECRETKEY, api_version=API_V1_1)
+V2Bittrex = btrxapi.Bittrex(APIKEY, SECRETKEY, api_version=API_V2_0)
+
 keysAPI.close()
 
 def api_settings():
 
     while True:
-
         print("Reading API keys...")
-        V1Bittrex = btrxapi.Bittrex(APIKEY, SECRETKEY, api_version=API_V1_1)
-        V2Bittrex = btrxapi.Bittrex(APIKEY, SECRETKEY, api_version=API_V2_0)
-
         IntegrityAPI = V2Bittrex.get_balance("BTC")
 
         if IntegrityAPI['message'] == "APIKEY_INVALID":
-
             time.sleep(1)
             print("Incorrect API key. Gate will now close...")
             print("")
@@ -42,7 +40,6 @@ def api_settings():
             exit()
 
         else:
-
             time.sleep(1)
             print("Connected.")
 
@@ -51,13 +48,9 @@ def api_settings():
 def market_settings():
 
     while True:
-
         MARKET = input("Enter BTC market e.g. 'BCC': ")
         MARKET = MARKET.upper()
         TickerString = "BTC-" + MARKET
-
-        V1Bittrex = btrxapi.Bittrex(APIKEY, SECRETKEY, api_version=API_V1_1)
-        V2Bittrex = btrxapi.Bittrex(APIKEY, SECRETKEY, api_version=API_V2_0)
 
         IntegrityMarket = V1Bittrex.get_ticker(TickerString)
         lValueArray = V1Bittrex.get_balance(MARKET)
@@ -68,7 +61,6 @@ def market_settings():
             lValue = lValueArray['result']['Available']
 
         if IntegrityMarket['message'] == "INVALID_MARKET":
-
             time.sleep(1)
             print("Incorrect market handle. Please retry...")
             print("")
