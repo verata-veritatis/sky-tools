@@ -1,10 +1,8 @@
 ####################################################################
 # API and Market Settings Assembly
-#
 # Author:   Anakratis / Vavrespa
 # NOTE:     You must have an API key assigned, with trading and
 #           viewing privileges.
-#
 ####################################################################
 
 import time
