@@ -1,10 +1,8 @@
 ####################################################################
 # Automated Stoploss for Bittrex
-#
 # Author:   Anakratis / Vavrespa
 # NOTE:     You must have an API key assigned, with trading and
 #           viewing privileges.
-#
 ####################################################################
 
 import time
