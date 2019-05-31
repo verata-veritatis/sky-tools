@@ -1,5 +1,5 @@
-## Kontour @ Bittrex
-A series of Bittrex bots to cleanse the soul.
+## Sky @ NODAL
+A series of bots to cleanse the soul.
 
 ### Donations
 
@@ -9,10 +9,6 @@ If you like my work and have some spare change, please donate! I take no profit 
 BTC: 1PXY9zSGnxBBq2CTBa23LNTwYj3XYwoB5v
 LTC: LcFpXJFkvA9SqpaKWcBt2bE2F9tY2TcDZv
 ```
-
-### Credits
-
-I want to thank **Eric Somdahl** for making my life exponentially easier with his Python API wrapper which is nothing short of amazing. Most, if not all, of my bots use Bittrex scraping functions from Eric's package. Check it out: https://github.com/ericsomdahl/python-bittrex.
 
 ### API Settings
 
@@ -31,4 +27,4 @@ These bots are python scripts packaged as executables. To run them on either Mac
 
 ### Edits & Modifications
 
-I'm an experimental physics and mathematics student, and hardly a certified "Python expert" or programming guru. If you feel something can be done better, feel free to bring up an **issue** or **pull request**, and I'll gladly take a look!
+I'm hardly a certified "Python expert" or programming guru. If you feel something can be done better, feel free to bring up an **issue** or **pull request**, and I'll gladly take a look!
