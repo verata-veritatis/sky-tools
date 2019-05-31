@@ -1,5 +1,5 @@
-## Sky @ NODAL
-A series of bots to cleanse the soul.
+## Sky Tools
+A series of exchange and trading tools to cleanse the soul.
 
 ### Donations
 
