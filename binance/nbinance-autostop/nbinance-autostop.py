@@ -10,7 +10,6 @@ import json
 
 from colorama import Fore, Back, Style
 from binance.client import Client
-from binance import exceptions
 
 import threading
 import requests
@@ -468,8 +467,8 @@ def Process(StopList):
                                 try:
                                     Binance.order_market_sell(symbol=Stop['ticker'], quantity=Stop['qty'])
 
-                                except exceptions.BinanceAPIException:
-                                    print("{}FATAL: Binance API error detected. Your trade amount is most likely below the notional minimum. Please double check your assets.{}".format(Back.RED, Style.RESET_ALL))
+                                except:
+                                    print("{}FATAL: Binance API error detected. Please double check your assets.{}".format(Back.RED, Style.RESET_ALL))
 
                                 Stop['status'] = True
 
@@ -478,8 +477,8 @@ def Process(StopList):
                             try:
                                 Binance.order_market_sell(symbol=Stop['ticker'], quantity=Stop['qty'])
 
-                            except exceptions.BinanceAPIException:
-                                print("{}FATAL: Binance API error detected. Your trade amount is most likely below the notional minimum. Please double check your assets.{}".format(Back.RED, Style.RESET_ALL))
+                            except:
+                                print("{}FATAL: Binance API error detected. Please double check your assets.{}".format(Back.RED, Style.RESET_ALL))
 
                             Stop['status'] = True
 
