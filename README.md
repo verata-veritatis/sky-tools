@@ -13,18 +13,13 @@ LTC: LcFpXJFkvA9SqpaKWcBt2bE2F9tY2TcDZv
 
 ### API Settings
 
-You'll need to have a working API and Secret key from Bittrex, with viewing **and** trading privileges. To do this, you'll first have to set up 2-Factor Authentication from the Settings menu. 
+You'll need to have a working API and Secret key from whatever exchange you'll be using, with viewing **and** trading privileges. Exchanges typically require 2-Factor Authentication setup to be able to create keys.
 
-- Click on *Settings* at the top once you are logged in on Bittrex. Go to the *Two-Factor Authentication* tab and setup 2FA.
-- Go to the *API Keys* tab and click *Add New Key*. From here, you'll see that a new key will be added and you'll have to confirm this change using your authenticator code. 
-- **Copy your secret key and store it, because once you click away from the page, _it's gone_.**  
-- Be sure to turn on *READ INFO*, *TRADE LIMIT* and *TRADE MARKET* options. *WITHDRAW* isn't needed for the time being. 
-
-When the bot asks you for the API key and Secret key, these are the two codes you'll want to feed it.
+When the bot asks you for the API key and Secret key, these are the two codes you'll want to feed it. All API keys are stored on your computer locally, so you'll only have to do this once.
 
 ### Instructions
 
-These bots are python scripts packaged as executables. To run them on either Mac or Windows, you only need to click on the app shortcut in the downloaded folder. This shortcut is linked to the proper executable within the source folder.
+Simply run the scripts using Python 3.7. There may be some differences between OSX or Windows; for example, `colorama` doesn't display color and style properly on Windows machines.
 
 ### Edits & Modifications
 
