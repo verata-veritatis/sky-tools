@@ -1,4 +1,4 @@
-## Autostop for Binance
+## Order Scaler for BitMEX
 
 ### Requirements
 
