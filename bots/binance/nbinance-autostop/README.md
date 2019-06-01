@@ -1,0 +1,3 @@
+** Autostop for Binance **
+
+Test.
